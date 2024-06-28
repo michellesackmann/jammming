@@ -6,7 +6,10 @@ function SearchResults(props) {
     return (
         <div>
             <h1>Results</h1>
-            <TrackList list={props.results}/>
+            <TrackList 
+                list={props.results}
+                isAdd={true}
+                onAdd={props.onAdd}/>
         </div>
     );
 }

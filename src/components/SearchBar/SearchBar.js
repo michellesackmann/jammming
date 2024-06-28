@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+    const { onSubmit } = props;
     const [term, setTerm] = useState('');
     const handleChange = (event) => {
         setTerm(event.target.value);
@@ -8,19 +9,18 @@ const SearchBar = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(`Searching for songs related to ${term}`);
+        onSubmit(term);
         setTerm('');
     }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <input
                 placeholder="Search songs"
                 value={term}
                 onChange={handleChange}>
             </input>
-            <button
-                onClick={handleSubmit}>
+            <button type="submit">
                 Search
             </button>
         </form>

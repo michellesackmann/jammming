@@ -12,7 +12,11 @@ function TrackList(props) {
                         title={track.title} 
                         artist={track.artist}
                         album={track.album}
-                        />
+                        track={track}
+                        isAdd={props.isAdd}
+                        onAdd={props.onAdd}
+                        onRemove={props.onRemove}
+                    />
                 ))}
             </ul>
         </div>

@@ -1,34 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import TrackList from '../Tracklist/TrackList';
 
 function Playlist(props) {
-    const [list, setList] = useState([]);
+    const { onSave } = props;
     const [name, setName] = useState('');
     const handleNameChange = (event) => {
         setName(event.target.value);
     }
 
-    const addTrackToList = (trackToAdd) => {
-        setList((prevList) => {
-            const inList = prevList.some(track => {
-                return track.id === trackToAdd.id;
-            });
-            if(!inList) {
-                return [trackToAdd, ...prevList];
-            } else {
-                return prevList;
-            }
-        });
-    }
-
-    useEffect(() => {
-
-    }, [list]);
-
-    const handleSubmit = (event) => {
-        console.log(`Saving playlist to spotify`);
-        setList([]);
+    const handleClick = () => {
+        onSave(name);
         setName('');
     }
 
@@ -39,9 +21,12 @@ function Playlist(props) {
                 placeholder='Give your playlist a name'
                 onChange={handleNameChange}>
             </input>
-            <TrackList list={list}/>
+            <TrackList 
+                list={props.list} 
+                onRemove={props.onRemove}
+                />
             <button
-                onClick={handleSubmit}>
+                onClick={handleClick}>
                 Save to spotify
             </button>
         </div>
